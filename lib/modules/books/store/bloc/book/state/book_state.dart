@@ -1,6 +1,6 @@
 
 
-import 'package:igrejoteca_app/modules/books/data/models/book_model.dart';
+import 'package:igrejoteca_admin/modules/books/data/models/book_model.dart';
 
 abstract class BookState {}
 
@@ -21,5 +21,7 @@ class LoadingReservedBookState implements BookState {}
 
 class EmptyBookState implements BookState {}
 
+class SavedBookState implements BookState {}
 
+class ErrorSavedBookState implements BookState {}
 

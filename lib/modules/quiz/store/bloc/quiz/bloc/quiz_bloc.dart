@@ -1,11 +1,12 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:igrejoteca_app/modules/quiz/data/models/question.dart';
-import 'package:igrejoteca_app/modules/quiz/data/repository/quiz_repository.dart';
-import 'package:igrejoteca_app/modules/quiz/data/repository/quiz_repository_impl.dart';
-import 'package:igrejoteca_app/modules/quiz/store/bloc/quiz/event/quiz_event.dart';
-import 'package:igrejoteca_app/modules/quiz/store/bloc/quiz/state/quiz_state.dart';
 import 'package:result_dart/result_dart.dart';
+
+import '../../../../data/models/question.dart';
+import '../../../../data/repository/quiz_repository.dart';
+import '../../../../data/repository/quiz_repository_impl.dart';
+import '../event/quiz_event.dart';
+import '../state/quiz_state.dart';
 
 class QuizBloc extends Bloc<QuizEvent, QuizState> {
   final QuizRepository _quizRepository = QuizRepositoryImpl();

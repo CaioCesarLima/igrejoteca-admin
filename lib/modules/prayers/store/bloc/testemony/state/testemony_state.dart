@@ -1,4 +1,6 @@
-import 'package:igrejoteca_app/modules/prayers/data/models/testemonie_model.dart';
+
+
+import '../../../../data/models/testemonie_model.dart';
 
 abstract class TestemonyState{}
 

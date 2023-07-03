@@ -123,7 +123,7 @@ class _SignupPageState extends State<SignupPage> {
                                 authBloc.emit(UserLoggedState(
                                     token: value.token, user: value.user));
                                 showDialog(context: context, builder: (context){
-                                  return CustomDialog(text: "Cadasto realizado com sucesso, faça login no app");
+                                  return const CustomDialog(text: "Cadasto realizado com sucesso, faça login no app");
                                 }).whenComplete(() => Navigator.of(context).pushReplacementNamed(
                                     LoginPage.route));
                               }

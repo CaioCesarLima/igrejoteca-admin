@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import 'package:igrejoteca_app/core/enviroments/enviroment.dart';
-import 'package:igrejoteca_app/core/utils/consts.dart';
 import 'package:http/http.dart' as http;
-import 'package:igrejoteca_app/modules/prayers/data/models/prayer_model.dart';
-import 'package:igrejoteca_app/modules/prayers/data/prayer_repository.dart';
+import 'package:igrejoteca_admin/core/enviroments/enviroment.dart';
+import 'package:igrejoteca_admin/modules/prayers/data/models/prayer_model.dart';
+import 'package:igrejoteca_admin/modules/prayers/data/prayer_repository.dart';
 import 'package:logger/logger.dart';
 import 'package:result_dart/result_dart.dart';
+
+import '../../../core/utils/consts.dart';
 
 class PrayerRepositoryImpl implements PrayerRepository {
   @override

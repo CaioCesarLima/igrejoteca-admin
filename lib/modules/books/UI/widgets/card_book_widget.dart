@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:igrejoteca_admin/core/theme/colors.dart';
 import 'package:igrejoteca_admin/core/utils/consts.dart';
-import 'package:igrejoteca_admin/modules/books/UI/pages/widgets/books_button.dart';
+import 'package:igrejoteca_admin/modules/books/UI/widgets/books_button.dart';
 import 'package:igrejoteca_admin/modules/books/data/models/book_model.dart';
 import 'package:igrejoteca_admin/modules/books/store/bloc/book/bloc/book_bloc.dart';
 import 'package:igrejoteca_admin/modules/books/store/bloc/book/event/book_event.dart';
 import 'package:igrejoteca_admin/modules/books/store/bloc/book/state/book_state.dart';
 import 'package:igrejoteca_admin/shared/Widgets/app_button.dart';
+import 'package:logger/logger.dart';
 
 class CardBookWidget extends StatefulWidget {
   final BookModel book;
@@ -33,6 +34,7 @@ class _CardBookWidgetState extends State<CardBookWidget> {
       bloc: _bloc,
       listener: (context, state) {
         if(state is ReservedBookState){
+          Logger().i(state);
         }
         if(state is ErrorReservedBookState){
         }
@@ -51,11 +53,15 @@ class _CardBookWidgetState extends State<CardBookWidget> {
                   child: widget.book.getPhotoBook(),
                 ),
               ),
-              Center(
-                child: Text(
-                  widget.book.title,
-                  style: const TextStyle(
-                      color: AppColors.accentColor, fontSize: 16),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Center(
+                  child: Text(
+                    widget.book.title,
+                    maxLines: 1,
+                    style: const TextStyle(
+                        color: AppColors.accentColor, fontSize: 16),
+                  ),
                 ),
               ),
               Center(
@@ -81,9 +87,11 @@ class _CardBookWidgetState extends State<CardBookWidget> {
                                   Column(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 15),
+                                        padding: const EdgeInsets.only(top: 15, left: 24, right: 24),
                                         child: Text(
                                           widget.book.title,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                           style: const TextStyle(
                                               color: AppColors.accentColor,
                                               fontSize: 24,
@@ -147,6 +155,7 @@ class _CardBookWidgetState extends State<CardBookWidget> {
                                                 : Colors.grey,
                                         ontap: widget.book.status == "released"
                                             ? () {
+                                              Navigator.pop(context);
                                               _bloc.add(ReserveBook(widget.book.id));
                                             }
                                             : () {}),

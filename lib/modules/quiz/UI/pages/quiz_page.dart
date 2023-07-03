@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:igrejoteca_app/core/theme/colors.dart';
-import 'package:igrejoteca_app/core/utils/consts.dart';
-import 'package:igrejoteca_app/modules/login/store/auth_bloc.dart';
-import 'package:igrejoteca_app/modules/login/store/auth_state.dart';
-import 'package:igrejoteca_app/modules/quiz/data/models/answer_model.dart';
-import 'package:igrejoteca_app/modules/quiz/data/models/question.dart';
-import 'package:igrejoteca_app/modules/quiz/data/repository/quiz_repository_impl.dart';
-import 'package:igrejoteca_app/modules/quiz/store/bloc/quiz/bloc/quiz_bloc.dart';
-import 'package:igrejoteca_app/modules/quiz/store/bloc/quiz/event/quiz_event.dart';
-import 'package:igrejoteca_app/modules/quiz/store/bloc/quiz/state/quiz_state.dart';
-import 'package:igrejoteca_app/shared/Widgets/app_button.dart';
-import 'package:igrejoteca_app/shared/Widgets/custom_drawer.dart';
 import 'package:logger/logger.dart';
+
+import '../../../../core/theme/colors.dart';
+import '../../../../core/utils/consts.dart';
+import '../../../../shared/Widgets/app_button.dart';
+import '../../../../shared/Widgets/custom_drawer.dart';
+import '../../../login/store/auth_bloc.dart';
+import '../../../login/store/auth_state.dart';
+import '../../data/models/answer_model.dart';
+import '../../data/models/question.dart';
+import '../../data/repository/quiz_repository_impl.dart';
+import '../../store/bloc/quiz/bloc/quiz_bloc.dart';
+import '../../store/bloc/quiz/event/quiz_event.dart';
+import '../../store/bloc/quiz/state/quiz_state.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});

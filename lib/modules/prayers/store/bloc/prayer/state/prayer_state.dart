@@ -1,5 +1,6 @@
 
-import 'package:igrejoteca_app/modules/prayers/data/models/prayer_model.dart';
+
+import '../../../../data/models/prayer_model.dart';
 
 abstract class PrayerState{}
 

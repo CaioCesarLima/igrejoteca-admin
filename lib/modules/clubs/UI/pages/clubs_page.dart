@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:igrejoteca_app/core/theme/colors.dart';
-import 'package:igrejoteca_app/shared/Widgets/custom_drawer.dart';
+
+import '../../../../core/theme/colors.dart';
+import '../../../../shared/Widgets/custom_drawer.dart';
 
 class ClubsPage extends StatefulWidget {
   const ClubsPage({super.key});

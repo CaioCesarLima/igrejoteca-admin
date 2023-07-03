@@ -1,4 +1,6 @@
-import 'package:igrejoteca_app/modules/quiz/data/models/answer_model.dart';
+
+
+import 'answer_model.dart';
 
 class QuestionModel {
   final String id;

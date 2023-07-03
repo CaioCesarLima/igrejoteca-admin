@@ -4,4 +4,5 @@ import 'package:result_dart/result_dart.dart';
 
 abstract class ReservationRepository {
   Future<Result<List<ReservationModel>, Exception>> loadReservations();
+  Future<Result<bool, Exception>> createLoan({required String userId, required String bookId});
 }

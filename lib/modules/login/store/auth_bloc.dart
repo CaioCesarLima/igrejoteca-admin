@@ -43,12 +43,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(LoadingAuthState());
     String token = await readAccessToken();
     String user = await readUserData();
-    String body = utf8.decode(base64.decode(user));
-    UserModel userModel = UserModel.fromJson(jsonDecode(body));
-    if(token.isEmpty){
+    if(token.isEmpty || user.isEmpty){
       emit(InitialAuthState());
     }else{
-
+      String body = utf8.decode(base64.decode(user));
+      UserModel userModel = UserModel.fromJson(jsonDecode(body));
       emit(UserLoggedState(token: token, user: UserModel(email: userModel.email, id: userModel.id, name: userModel.name, scoreQuiz: userModel.scoreQuiz)));
     }
   }
@@ -57,7 +56,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _logout(LogOutEvent event, Emitter<AuthState> emit) async {
     emit(LoadingAuthState());
     await deleteAccessToken();
-    await AuthRepositoryImpl().deleteFirebaseToken();
     emit(LogoutAuthState());
   }
 }

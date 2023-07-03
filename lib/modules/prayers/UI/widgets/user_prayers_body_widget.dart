@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:igrejoteca_app/core/theme/colors.dart';
-import 'package:igrejoteca_app/core/utils/consts.dart';
-import 'package:igrejoteca_app/modules/prayers/UI/widgets/prayer_card_widget.dart';
-import 'package:igrejoteca_app/modules/prayers/UI/widgets/prayers_body_widget.dart';
-import 'package:igrejoteca_app/modules/prayers/store/bloc/prayer/bloc/loan_bloc.dart';
-import 'package:igrejoteca_app/modules/prayers/store/bloc/prayer/event/prayer_event.dart';
-import 'package:igrejoteca_app/modules/prayers/store/bloc/prayer/state/prayer_state.dart';
+import 'package:igrejoteca_admin/modules/prayers/UI/widgets/prayer_card_widget.dart';
+import 'package:igrejoteca_admin/modules/prayers/UI/widgets/prayers_body_widget.dart';
+
+import '../../../../core/theme/colors.dart';
+import '../../../../core/utils/consts.dart';
+import '../../store/bloc/prayer/bloc/loan_bloc.dart';
+import '../../store/bloc/prayer/event/prayer_event.dart';
+import '../../store/bloc/prayer/state/prayer_state.dart';
 
 class UserPrayersWidget extends StatefulWidget {
   const UserPrayersWidget({

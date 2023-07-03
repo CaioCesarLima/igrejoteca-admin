@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:igrejoteca_app/core/theme/colors.dart';
-import 'package:igrejoteca_app/core/utils/consts.dart';
-import 'package:igrejoteca_app/modules/prayers/data/models/prayer_model.dart';
+
+import '../../../../core/theme/colors.dart';
+import '../../../../core/utils/consts.dart';
+import '../../data/models/prayer_model.dart';
 
 class PrayerCardWidget extends StatelessWidget {
   final PrayerModel prayerModel;

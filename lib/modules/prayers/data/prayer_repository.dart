@@ -1,5 +1,7 @@
-import 'package:igrejoteca_app/modules/prayers/data/models/prayer_model.dart';
+
 import 'package:result_dart/result_dart.dart';
+
+import 'models/prayer_model.dart';
 
 abstract class PrayerRepository {
   Future<Result<List<PrayerModel>, Exception>> getUserPrayers();

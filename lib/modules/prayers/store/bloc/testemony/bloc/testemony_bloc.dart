@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:igrejoteca_app/modules/prayers/data/models/testemonie_model.dart';
-import 'package:igrejoteca_app/modules/prayers/data/testemonies_repository_impl.dart';
-import 'package:igrejoteca_app/modules/prayers/data/tetemonies_repository.dart';
-import 'package:igrejoteca_app/modules/prayers/store/bloc/testemony/event/testemony_event.dart';
-import 'package:igrejoteca_app/modules/prayers/store/bloc/testemony/state/testemony_state.dart';
 import 'package:result_dart/result_dart.dart';
+
+import '../../../../data/models/testemonie_model.dart';
+import '../../../../data/testemonies_repository_impl.dart';
+import '../../../../data/tetemonies_repository.dart';
+import '../event/testemony_event.dart';
+import '../state/testemony_state.dart';
 
 class TestemonyBloc extends Bloc<TestemonieEvent, TestemonyState>{
   TestemoniesRepository testemoniesRepository = TestemoniesRepositoryImpl();

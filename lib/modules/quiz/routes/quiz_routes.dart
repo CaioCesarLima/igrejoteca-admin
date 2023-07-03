@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:igrejoteca_app/modules/quiz/UI/pages/quiz_page.dart';
+
+import '../UI/pages/quiz_page.dart';
 
 class QuizRoutes {
   static const String quiz = QuizPage.route;

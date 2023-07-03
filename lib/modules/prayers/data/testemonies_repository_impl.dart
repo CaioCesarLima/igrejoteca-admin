@@ -1,13 +1,14 @@
 
 import 'dart:convert';
 
-import 'package:igrejoteca_app/core/enviroments/enviroment.dart';
-import 'package:igrejoteca_app/core/utils/consts.dart';
 import 'package:http/http.dart' as http;
-import 'package:igrejoteca_app/modules/prayers/data/models/testemonie_model.dart';
-import 'package:igrejoteca_app/modules/prayers/data/tetemonies_repository.dart';
 import 'package:logger/logger.dart';
 import 'package:result_dart/result_dart.dart';
+
+import '../../../core/enviroments/enviroment.dart';
+import '../../../core/utils/consts.dart';
+import 'models/testemonie_model.dart';
+import 'tetemonies_repository.dart';
 
 class TestemoniesRepositoryImpl implements TestemoniesRepository {
   @override

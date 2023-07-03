@@ -3,12 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:igrejoteca_admin/core/theme/colors.dart';
 import 'package:igrejoteca_admin/core/utils/consts.dart';
-import 'package:igrejoteca_admin/modules/books/UI/pages/home_books_page.dart';
 import 'package:igrejoteca_admin/modules/emprestimos/data/models/loan_model.dart';
 import 'package:igrejoteca_admin/modules/emprestimos/store/bloc/loan/bloc/loan_bloc.dart';
 import 'package:igrejoteca_admin/modules/emprestimos/store/bloc/loan/event/loan_event.dart';
 import 'package:igrejoteca_admin/modules/emprestimos/store/bloc/loan/state/loan_state.dart';
-import 'package:igrejoteca_admin/shared/Widgets/app_button.dart';
 import 'package:igrejoteca_admin/shared/Widgets/custom_drawer.dart';
 
 class EmprestimosPage extends StatefulWidget {
@@ -39,7 +37,12 @@ class _EmprestimosPageState extends State<EmprestimosPage> {
         title: const Text("Empréstimos"),
       ),
       drawer: const CustomDrawer(),
-      body: BlocBuilder<LoanBloc, LoanState>(
+      body: BlocConsumer<LoanBloc, LoanState>(
+        listener: (context, state) {
+          if(state is ReturnedLoanState){
+            _loanBloc.add(GetLoanEvent());
+          }
+        },
         bloc: _loanBloc,
         builder: (context, state) {
           if (state is LoadingLoanState) {
@@ -47,7 +50,7 @@ class _EmprestimosPageState extends State<EmprestimosPage> {
               child: CircularProgressIndicator(),
             );
           }
-          if(state is EmptyLoanState){
+          if (state is EmptyLoanState) {
             return const Center(
               child: Text("Lista de Empréstimos vazia"),
             );
@@ -67,27 +70,13 @@ class _EmprestimosPageState extends State<EmprestimosPage> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 20),
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: AppColors.primaryColor, width: 2),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10))),
-                        child: const Text(
-                          "Todos",
-                          style: TextStyle(color: AppColors.primaryColor),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        decoration: BoxDecoration(
                             color: AppColors.accentColor,
                             border: Border.all(
                                 color: AppColors.accentColor, width: 2),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10))),
                         child: const Text(
-                          "Devolvidos",
+                          "Devolvido",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -101,7 +90,7 @@ class _EmprestimosPageState extends State<EmprestimosPage> {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10))),
                         child: const Text(
-                          "Comigo",
+                          "Emprestado",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -115,24 +104,22 @@ class _EmprestimosPageState extends State<EmprestimosPage> {
                     child: ListView.builder(
                       itemCount: state.loans.length,
                       itemBuilder: (context, index) {
+                        LoanModel loan = state.loans[index];
                         return Padding(
                           padding: const EdgeInsets.only(top: 15),
-                          child: CardReservationBook(loan: state.loans[index],),
+                          child: GestureDetector(
+                            onTap: (){
+                              _loanBloc.add(ReturnLoanEvent(loan: loan));
+                            },
+                            child: CardReservationBook(
+                              loan: loan,
+                            ),
+                          ),
                         );
                       },
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 20, horizontal: Consts.khorintalPading),
-                  child: AppButton(
-                      label: "Reservar",
-                      backgroundColor: AppColors.primaryColor,
-                      ontap: () {
-                        Navigator.of(context).pushNamed(HomeBooksPage.route);
-                      }),
-                )
               ],
             );
           }
@@ -146,7 +133,8 @@ class _EmprestimosPageState extends State<EmprestimosPage> {
 class CardReservationBook extends StatelessWidget {
   final LoanModel loan;
   const CardReservationBook({
-    Key? key, required this.loan,
+    Key? key,
+    required this.loan,
   }) : super(key: key);
 
   @override
@@ -168,7 +156,9 @@ class CardReservationBook extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: loan.returned ? AppColors.accentColor : AppColors.primaryColor,
+              backgroundColor: loan.returned
+                  ? AppColors.accentColor
+                  : AppColors.primaryColor,
             ),
             const SizedBox(
               width: 10,
@@ -176,13 +166,19 @@ class CardReservationBook extends StatelessWidget {
             Expanded(
               child: Text(
                 loan.book.title,
+                maxLines: 1,
                 style: const TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w600),
               ),
             ),
-            loan.isLoanExpired() && !loan.returned ? const Text("Atrasado", style: TextStyle(color: Colors.red),) : Container()
+            loan.isLoanExpired() && !loan.returned
+                ? const Text(
+                    "Atrasado",
+                    style: TextStyle(color: Colors.red),
+                  )
+                : Container()
           ],
         ),
       ),

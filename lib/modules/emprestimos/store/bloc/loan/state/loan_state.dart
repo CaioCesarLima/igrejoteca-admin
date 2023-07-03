@@ -13,3 +13,5 @@ class LoadedLoanState extends LoanState{
 class ErrorLoanState extends LoanState{}
 
 class EmptyLoanState extends LoanState{}
+
+class ReturnedLoanState extends LoanState{}

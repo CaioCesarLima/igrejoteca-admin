@@ -1,13 +1,14 @@
 
 import 'dart:convert';
 
-import 'package:igrejoteca_app/core/enviroments/enviroment.dart';
-import 'package:igrejoteca_app/core/utils/consts.dart';
-import 'package:igrejoteca_app/modules/quiz/data/models/question.dart';
-import 'package:igrejoteca_app/modules/quiz/data/repository/quiz_repository.dart';
 import 'package:http/http.dart' as http;
+import 'package:igrejoteca_admin/modules/quiz/data/repository/quiz_repository.dart';
 import 'package:logger/logger.dart';
 import 'package:result_dart/result_dart.dart';
+
+import '../../../../core/enviroments/enviroment.dart';
+import '../../../../core/utils/consts.dart';
+import '../models/question.dart';
 
 class QuizRepositoryImpl implements QuizRepository {
   @override

@@ -75,21 +75,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       ListTile(
                         iconColor: AppColors.accentColor,
                         onTap: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              PrayersPage.route, ((route) => false));
-                        },
-                        leading: const Icon(Icons.monetization_on),
-                        title: const Text(
-                          "Orações",
-                          style: TextStyle(
-                              color: AppColors.accentColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      ListTile(
-                        iconColor: AppColors.accentColor,
-                        onTap: () {
                           Navigator.pushNamed(context, ReservatiionPage.route);
                         },
                         leading: const Icon(Icons.monetization_on),
@@ -109,21 +94,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         leading: const Icon(Icons.monetization_on),
                         title: const Text(
                           "Empréstimos",
-                          style: TextStyle(
-                              color: AppColors.accentColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      ListTile(
-                        iconColor: AppColors.accentColor,
-                        onTap: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              ClubsPage.route, ((route) => false));
-                        },
-                        leading: const Icon(Icons.monetization_on),
-                        title: const Text(
-                          "Clube do livro",
                           style: TextStyle(
                               color: AppColors.accentColor,
                               fontSize: 18,
@@ -166,7 +136,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ],
             ),
           );
-          
         }
         return Container();
       },

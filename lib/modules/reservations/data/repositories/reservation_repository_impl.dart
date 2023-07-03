@@ -13,7 +13,7 @@ class ReservationRepositoryImpl implements ReservationRepository{
   @override
   Future<Result<List<ReservationModel>, Exception>> loadReservations() async {
     try {
-      Uri url = getBackendURL(path: "/api/reserve-user");
+      Uri url = getBackendURL(path: "/api/reserves");
       Map<String, String> headers = await Consts.authHeader();
 
       http.Response resp = await http.get(url, headers: headers);
@@ -23,6 +23,33 @@ class ReservationRepositoryImpl implements ReservationRepository{
         List<dynamic> data = body['data'];
         List<ReservationModel>reserves = data.map((e) => ReservationModel.fromjson(e)).toList();
         return Result.success(reserves);
+      }else {
+        Logger().i(resp.statusCode);
+        Result.failure(Exception("Erro na comunicação"));
+      }
+    } catch (e) {
+      Logger().d(e.toString());
+      return Result.failure(Exception(e.toString()));
+    }
+
+    return Result.failure(Exception('Ocorreu algum erro!'));
+  }
+  
+  @override
+  Future<Result<bool, Exception>> createLoan({required String userId, required String bookId}) async {
+   try {
+      Uri url = getBackendURL(path: "/api/loans");
+      Map<String, String> headers = await Consts.authHeader();
+
+      String body = json.encode({
+        "book_id": bookId,
+        "user_id": userId
+      });
+
+      http.Response resp = await http.post(url, headers: headers, body: body);
+
+      if (resp.statusCode == 200) {
+        return Result.success(true);
       }else {
         Logger().i(resp.statusCode);
         Result.failure(Exception("Erro na comunicação"));

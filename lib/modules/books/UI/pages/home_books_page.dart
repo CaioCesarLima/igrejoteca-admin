@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:igrejoteca_admin/core/theme/colors.dart';
 import 'package:igrejoteca_admin/core/utils/consts.dart';
-import 'package:igrejoteca_admin/modules/books/UI/pages/widgets/card_book_widget.dart';
+import 'package:igrejoteca_admin/modules/books/UI/pages/add_book/add_book.dart';
+import 'package:igrejoteca_admin/modules/books/UI/widgets/card_book_widget.dart';
 import 'package:igrejoteca_admin/modules/books/data/models/book_model.dart';
 import 'package:igrejoteca_admin/modules/books/store/bloc/book/bloc/book_bloc.dart';
 import 'package:igrejoteca_admin/modules/books/store/bloc/book/event/book_event.dart';
@@ -35,9 +36,9 @@ class _HomeBooksPageState extends State<HomeBooksPage> {
     return BlocConsumer<BookBloc, BookState>(
       listener: (context, state) {
         if(state is ReservedBookState){
-          Logger().i("Livro reservado");
+         _bookbloc.add(GetBook(token: ""));
         }
-        if(state is ErrorReservedBookState){
+        if (state is ErrorReservedBookState) {
           _bookbloc.add(GetBook(token: ""));
         }
       },
@@ -50,6 +51,12 @@ class _HomeBooksPageState extends State<HomeBooksPage> {
             title: const Text("Livros"),
           ),
           drawer: const CustomDrawer(),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(AddBook.route).then((value) => _bookbloc.add(GetBook(token: "")));
+            },
+            child: const Icon(Icons.add),
+          ),
           body: Column(
             children: [
               SizedBox(
@@ -82,12 +89,14 @@ class _HomeBooksPageState extends State<HomeBooksPage> {
                 ),
               ),
               (state is LoadedBookState)
-                  ? BodyHomeBook(list: state.books,)
+                  ? BodyHomeBook(
+                      list: state.books,
+                    )
                   : const Expanded(
-                    child: Center(
-                    child: CircularProgressIndicator(),
+                      child: Center(
+                        child: CircularProgressIndicator(),
                       ),
-                  ),
+                    ),
             ],
           ),
         );
@@ -99,25 +108,26 @@ class _HomeBooksPageState extends State<HomeBooksPage> {
 class BodyHomeBook extends StatelessWidget {
   final List<BookModel> list;
   const BodyHomeBook({
-    Key? key, required this.list,
+    Key? key,
+    required this.list,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: GridView.builder(
-            itemCount: list.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      padding: const EdgeInsets.all(10.0),
+      child: GridView.builder(
+        itemCount: list.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,
-      ),
-      itemBuilder: (context, index) {
+        ),
+        itemBuilder: (context, index) {
           return CardBookWidget(book: list[index]);
-      },
-    ),
-        ));
+        },
+      ),
+    ));
   }
 }

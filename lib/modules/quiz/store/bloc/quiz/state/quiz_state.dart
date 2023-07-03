@@ -1,4 +1,4 @@
-import 'package:igrejoteca_app/modules/quiz/data/models/question.dart';
+import '../../../../data/models/question.dart';
 
 abstract class QuizState{}
 

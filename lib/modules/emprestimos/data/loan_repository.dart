@@ -4,4 +4,5 @@ import 'package:result_dart/result_dart.dart';
 
 abstract class LoanRepository {
   Future<Result<List<LoanModel>, Exception>> getUserLoan();
+  Future<Result<bool, Exception>> returnLoan({required String loanId});
 }

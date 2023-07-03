@@ -15,3 +15,9 @@ class LoadedReservationState extends ReservationState{
 class ErrorLoadReservationState extends ReservationState{}
 
 class EmptyReservationState extends ReservationState{}
+
+class CreatedLoanState extends ReservationState{
+  final ReservationModel reservation;
+
+  CreatedLoanState(this.reservation);
+}

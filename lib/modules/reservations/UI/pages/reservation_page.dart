@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:igrejoteca_app/core/theme/colors.dart';
-import 'package:igrejoteca_app/core/utils/consts.dart';
-import 'package:igrejoteca_app/modules/books/UI/pages/home_books_page.dart';
-import 'package:igrejoteca_app/modules/reservations/data/models/reservation_model.dart';
-import 'package:igrejoteca_app/modules/reservations/store/bloc/reservation/bloc/reservation_bloc.dart';
-import 'package:igrejoteca_app/modules/reservations/store/bloc/reservation/event/reservation_event.dart';
-import 'package:igrejoteca_app/shared/Widgets/app_button.dart';
-import 'package:igrejoteca_app/shared/Widgets/custom_drawer.dart';
+import 'package:igrejoteca_admin/core/theme/colors.dart';
+import 'package:igrejoteca_admin/core/utils/consts.dart';
+import 'package:igrejoteca_admin/modules/books/UI/pages/home_books_page.dart';
+import 'package:igrejoteca_admin/modules/reservations/data/models/reservation_model.dart';
+import 'package:igrejoteca_admin/modules/reservations/store/bloc/reservation/bloc/reservation_bloc.dart';
+import 'package:igrejoteca_admin/modules/reservations/store/bloc/reservation/event/reservation_event.dart';
+import 'package:igrejoteca_admin/modules/reservations/store/bloc/reservation/reducers/reservation_reducer.dart';
+import 'package:igrejoteca_admin/shared/Widgets/app_button.dart';
+import 'package:igrejoteca_admin/shared/Widgets/custom_drawer.dart';
+import 'package:logger/logger.dart';
+import 'package:rx_notifier/rx_notifier.dart';
 
+import '../../store/bloc/reservation/atoms/reservation_atoms.dart';
 import '../../store/bloc/reservation/state/reservation_state.dart';
 
 class ReservatiionPage extends StatefulWidget {
@@ -40,7 +44,22 @@ class _ReservatiionPageState extends State<ReservatiionPage> {
         title: const Text("Reservas"),
       ),
       drawer: const CustomDrawer(),
-      body: BlocBuilder<ReservationBloc, ReservationState>(
+      body: BlocConsumer<ReservationBloc, ReservationState>(
+        listener: (context, state){
+          if(state is CreatedLoanState){
+            _reservationBloc.add(LoadReservationEvent());
+          }
+          if(state is ErrorLoadReservationState){
+            Logger().i("erro load");
+            _reservationBloc.add(LoadReservationEvent());
+          }
+
+          if(state is LoadedReservationState){
+            if(state.reserves.isEmpty){
+              _reservationBloc.emit(EmptyReservationState());
+            }
+          }
+        } ,
         bloc: _reservationBloc,
         builder: (context, state) {
           if (state is LoadingReservationState) {
@@ -53,6 +72,7 @@ class _ReservatiionPageState extends State<ReservatiionPage> {
               child: Text("Nenhuma Reserva realizada ainda"),
             );
           }
+          
           if (state is LoadedReservationState) {
             return Column(children: [
               Expanded(
@@ -62,23 +82,19 @@ class _ReservatiionPageState extends State<ReservatiionPage> {
                   child: ListView.builder(
                     itemCount: state.reserves.length,
                     itemBuilder: (context, index) {
+                      ReservationModel reserve = state.reserves[index];
                       return Padding(
                         padding: const EdgeInsets.only(top: 15),
-                        child: CardReservationBook(reserve: state.reserves[index]),
+                        child: GestureDetector(
+                          onTap: () {
+                            _reservationBloc.add(CreateLoan(reservation: reserve));
+                          },
+                          child: CardReservationBook(reserve: reserve),
+                        ),
                       );
                     },
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 20, horizontal: Consts.khorintalPading),
-                child: AppButton(
-                    label: "Reservar",
-                    backgroundColor: AppColors.primaryColor,
-                    ontap: () {
-                      Navigator.of(context).pushNamed(HomeBooksPage.route);
-                    }),
               ),
             ]);
           }
@@ -92,7 +108,8 @@ class _ReservatiionPageState extends State<ReservatiionPage> {
 class CardReservationBook extends StatelessWidget {
   final ReservationModel reserve;
   const CardReservationBook({
-    Key? key, required this.reserve,
+    Key? key,
+    required this.reserve,
   }) : super(key: key);
 
   @override
@@ -119,12 +136,33 @@ class CardReservationBook extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            Text(
-              reserve.book.title,
-              style: const TextStyle(
-                  color: AppColors.primaryColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Text(
+                    reserve.book.title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: const TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  reserve.user.name,
+                  style: const TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600),
+                ),
+              ],
             )
           ],
         ),

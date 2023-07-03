@@ -11,7 +11,7 @@ class UserModel{
   factory UserModel.fromJson(Map<String, dynamic> json) {
 
     final String email = json['email'];
-    final String id = json['id'];
+    final String id = json['id'] ?? json['user_id'];
     final String name = json['name'];
     final int scoreQuiz = json['score_quiz'] ?? 0;
 

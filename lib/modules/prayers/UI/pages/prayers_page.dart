@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:igrejoteca_app/core/theme/colors.dart';
-import 'package:igrejoteca_app/modules/prayers/UI/widgets/prayers_body_widget.dart';
-import 'package:igrejoteca_app/modules/prayers/UI/widgets/testemonials_body_widget.dart';
-import 'package:igrejoteca_app/modules/prayers/UI/widgets/user_prayers_body_widget.dart';
-import 'package:igrejoteca_app/shared/Widgets/custom_drawer.dart';
+
+import '../../../../core/theme/colors.dart';
+import '../../../../shared/Widgets/custom_drawer.dart';
+import '../widgets/prayers_body_widget.dart';
+import '../widgets/testemonials_body_widget.dart';
+import '../widgets/user_prayers_body_widget.dart';
 
 class PrayersPage extends StatefulWidget {
   const PrayersPage({super.key});
