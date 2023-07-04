@@ -34,7 +34,9 @@ class _AddBookState extends State<AddBook> {
 
   @override
   void initState() {
+    super.initState();
     bookBloc = GetIt.I<BookBloc>();
+    // ignore: invalid_use_of_visible_for_testing_member
     bookBloc.emit(EmptyBookState());
   }
 

@@ -3,14 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:igrejoteca_admin/core/theme/colors.dart';
 import 'package:igrejoteca_admin/modules/books/UI/pages/home_books_page.dart';
-import 'package:igrejoteca_admin/modules/clubs/UI/pages/clubs_page.dart';
 import 'package:igrejoteca_admin/modules/emprestimos/UI/pages/emprestimos_page.dart';
 import 'package:igrejoteca_admin/modules/login/UI/pages/initial_page.dart';
 import 'package:igrejoteca_admin/modules/login/store/auth_bloc.dart';
 import 'package:igrejoteca_admin/modules/login/store/auth_event.dart';
 import 'package:igrejoteca_admin/modules/login/store/auth_state.dart';
-import 'package:igrejoteca_admin/modules/prayers/UI/pages/prayers_page.dart';
-import 'package:igrejoteca_admin/modules/quiz/UI/pages/quiz_page.dart';
+import 'package:igrejoteca_admin/modules/notifications/UI/notifications_page.dart';
+import 'package:igrejoteca_admin/modules/quiz/UI/pages/rank_page.dart';
 import 'package:igrejoteca_admin/modules/reservations/UI/pages/reservation_page.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -103,12 +102,25 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       ListTile(
                         iconColor: AppColors.accentColor,
                         onTap: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              QuizPage.route, ((route) => false));
+                          Navigator.pushNamed(context, RankPage.route);
                         },
                         leading: const Icon(Icons.monetization_on),
                         title: const Text(
-                          "Quiz",
+                          "Rank",
+                          style: TextStyle(
+                              color: AppColors.accentColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      ListTile(
+                        iconColor: AppColors.accentColor,
+                        onTap: () {
+                          Navigator.pushNamed(context, NotificationsPage.route);
+                        },
+                        leading: const Icon(Icons.monetization_on),
+                        title: const Text(
+                          "Notificação",
                           style: TextStyle(
                               color: AppColors.accentColor,
                               fontSize: 18,

@@ -4,7 +4,6 @@ import 'package:igrejoteca_admin/modules/reservations/data/repositories/reservat
 import 'package:igrejoteca_admin/modules/reservations/data/repositories/reservation_repository_impl.dart';
 import 'package:igrejoteca_admin/modules/reservations/store/bloc/reservation/event/reservation_event.dart';
 import 'package:igrejoteca_admin/modules/reservations/store/bloc/reservation/state/reservation_state.dart';
-import 'package:logger/logger.dart';
 import 'package:result_dart/result_dart.dart';
 
 class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {

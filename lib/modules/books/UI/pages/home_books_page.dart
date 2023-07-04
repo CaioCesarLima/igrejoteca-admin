@@ -10,7 +10,6 @@ import 'package:igrejoteca_admin/modules/books/store/bloc/book/bloc/book_bloc.da
 import 'package:igrejoteca_admin/modules/books/store/bloc/book/event/book_event.dart';
 import 'package:igrejoteca_admin/modules/books/store/bloc/book/state/book_state.dart';
 import 'package:igrejoteca_admin/shared/Widgets/custom_drawer.dart';
-import 'package:logger/logger.dart';
 
 class HomeBooksPage extends StatefulWidget {
   const HomeBooksPage({super.key});

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:igrejoteca_admin/core/theme/colors.dart';
 import 'package:igrejoteca_admin/modules/emprestimos/UI/pages/emprestimos_page.dart';
-import 'package:igrejoteca_admin/modules/login/UI/pages/signup_page.dart';
 import 'package:igrejoteca_admin/modules/login/store/auth_bloc.dart';
 import 'package:igrejoteca_admin/modules/login/store/auth_event.dart';
 import 'package:igrejoteca_admin/modules/login/store/auth_state.dart';
@@ -53,16 +52,16 @@ class _InitialPageState extends State<InitialPage> {
                       Navigator.of(context).pushNamed('/login');
                     },
                   )),
-              Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
-                  child: AppButton(
-                    label: "Cadastrar",
-                    backgroundColor: AppColors.accentColor,
-                    ontap: () {
-                      Navigator.of(context).pushNamed(SignupPage.route);
-                    },
-                  )),
+              // Padding(
+              //     padding:
+              //         const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
+              //     child: AppButton(
+              //       label: "Cadastrar",
+              //       backgroundColor: AppColors.accentColor,
+              //       ontap: () {
+              //         Navigator.of(context).pushNamed(SignupPage.route);
+              //       },
+              //     )),
             ],
           ),
         );

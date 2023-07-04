@@ -1,1 +1,1 @@
-const String kBackendEndpoint = "nommo.quleap.net";
+const String kBackendEndpoint = "igrejotecaapi.gigalixirapp.com";

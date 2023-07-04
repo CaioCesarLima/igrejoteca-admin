@@ -120,6 +120,7 @@ class _SignupPageState extends State<SignupPage> {
                             });
                             onSubmit().then((value) {
                               if (value is AuthPayload) {
+                                // ignore: invalid_use_of_visible_for_testing_member
                                 authBloc.emit(UserLoggedState(
                                     token: value.token, user: value.user));
                                 showDialog(context: context, builder: (context){

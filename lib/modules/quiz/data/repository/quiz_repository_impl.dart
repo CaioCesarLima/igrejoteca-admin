@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:igrejoteca_admin/modules/quiz/data/models/rank_model.dart';
 import 'package:igrejoteca_admin/modules/quiz/data/repository/quiz_repository.dart';
 import 'package:logger/logger.dart';
 import 'package:result_dart/result_dart.dart';
@@ -50,6 +51,34 @@ class QuizRepositoryImpl implements QuizRepository {
       Logger().d(e.toString());
     }
 
+  }
+
+  @override
+  Future<Result<List<RankModel>, Exception>> getRank() async {
+    try {
+      Uri url = getBackendURL(path: "/api/rank");
+      Map<String, String> headers = await Consts.authHeader();
+
+      http.Response resp = await http.get(url, headers: headers);
+
+      if (resp.statusCode == 200) {
+        Map<String, dynamic> body = jsonDecode(resp.body);
+        List<dynamic> data = body['data'];
+        List<RankModel>ranks =[];
+        for (int i = 0; i < data.length; i++) {
+          ranks.add(RankModel.fromJson(data[i], i+1));
+        }
+        return Result.success(ranks);
+      }else {
+        Logger().i(resp.statusCode);
+        Result.failure(Exception("Erro na comunicação"));
+      }
+    } catch (e) {
+      Logger().d(e.toString());
+      return Result.failure(Exception(e.toString()));
+    }
+
+    return Result.failure(Exception('Ocorreu algum erro!'));
   }
   
 }

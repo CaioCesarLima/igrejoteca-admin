@@ -3,17 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:igrejoteca_admin/core/theme/colors.dart';
 import 'package:igrejoteca_admin/core/utils/consts.dart';
-import 'package:igrejoteca_admin/modules/books/UI/pages/home_books_page.dart';
 import 'package:igrejoteca_admin/modules/reservations/data/models/reservation_model.dart';
 import 'package:igrejoteca_admin/modules/reservations/store/bloc/reservation/bloc/reservation_bloc.dart';
 import 'package:igrejoteca_admin/modules/reservations/store/bloc/reservation/event/reservation_event.dart';
-import 'package:igrejoteca_admin/modules/reservations/store/bloc/reservation/reducers/reservation_reducer.dart';
-import 'package:igrejoteca_admin/shared/Widgets/app_button.dart';
 import 'package:igrejoteca_admin/shared/Widgets/custom_drawer.dart';
 import 'package:logger/logger.dart';
-import 'package:rx_notifier/rx_notifier.dart';
-
-import '../../store/bloc/reservation/atoms/reservation_atoms.dart';
 import '../../store/bloc/reservation/state/reservation_state.dart';
 
 class ReservatiionPage extends StatefulWidget {
@@ -56,6 +50,7 @@ class _ReservatiionPageState extends State<ReservatiionPage> {
 
           if(state is LoadedReservationState){
             if(state.reserves.isEmpty){
+              // ignore: invalid_use_of_visible_for_testing_member
               _reservationBloc.emit(EmptyReservationState());
             }
           }

@@ -9,6 +9,7 @@ PreferredSize appBarAuth(String title) {
       backgroundColor: AppColors.lightBlueColor,
       centerTitle: true,
       title: Text(title),
+      leading: Container(),
     ),
   );
 }

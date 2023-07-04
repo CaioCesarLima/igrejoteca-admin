@@ -5,6 +5,7 @@ import 'package:igrejoteca_admin/modules/clubs/routes/clubs_routes.dart';
 import 'package:igrejoteca_admin/modules/emprestimos/routes/emprestimos_routes.dart';
 import 'package:igrejoteca_admin/modules/login/UI/pages/initial_page.dart';
 import 'package:igrejoteca_admin/modules/login/routes/routes.dart';
+import 'package:igrejoteca_admin/modules/notifications/routes/notification_routes.dart';
 import 'package:igrejoteca_admin/modules/prayers/routes/prayers_routes.dart';
 import 'package:igrejoteca_admin/modules/quiz/routes/quiz_routes.dart';
 import 'package:igrejoteca_admin/modules/reservations/routes/reservation_routes.dart';
@@ -26,7 +27,8 @@ class Router {
       ...EmprestimoRoutes.routes,
       ...PrayersRoutes.routes,
       ...QuizRoutes.routes,
-      ...ClubsRoutes.routes
+      ...ClubsRoutes.routes,
+      ...NotificationRoutes.routes
     };
     final builder = routes[settings.name];
     if (builder != null) {

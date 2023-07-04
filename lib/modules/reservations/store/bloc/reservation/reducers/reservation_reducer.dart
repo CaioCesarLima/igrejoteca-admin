@@ -8,7 +8,6 @@ class ReservationReducer extends RxReducer {
     }
 
     void _increment(){
-      print("oi");
         counterState.setValue(counterState.value + 1);
     }
 }

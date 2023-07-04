@@ -25,7 +25,7 @@ class AppButton extends StatelessWidget {
             color: backgroundColor,
             borderRadius: const BorderRadius.all(Radius.circular(10))),
         child: icon == null
-            ? loading != null
+            ? loading != null && loading == true
                 ? const CircularProgressIndicator(color: Colors.white,)
                 : Text(
                     label,
