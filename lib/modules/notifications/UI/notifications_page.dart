@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:igrejoteca_admin/core/theme/colors.dart';
 import 'package:igrejoteca_admin/modules/notifications/data/notification_repository.dart';
 import 'package:igrejoteca_admin/modules/notifications/data/notification_repository_impl.dart';
@@ -25,7 +24,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   final TextEditingController _notificationTitle = TextEditingController();
   final NotificationRepository repository = NotificationRepositoryImpl();
 
-  Future<bool> send_notification() async {
+  Future<bool> sendNotification() async {
     Result<bool, Exception> result = await repository.sendNotifcation(
         message: _notificationControlller.text, title: _notificationTitle.text);
     bool response = false;
@@ -76,7 +75,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                     FocusScope.of(context).unfocus();
                     if (_notificationControlller.text.isNotEmpty &&
                         _notificationTitle.text.isNotEmpty) {
-                      await send_notification().then((value) {
+                      await sendNotification().then((value) {
                         if (value) {
                           showDialog(
                             context: context,
